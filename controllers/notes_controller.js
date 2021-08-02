@@ -5,33 +5,33 @@ const getAllNotes = async(req, res) => {
         const posts = await Notes.find({});
         if (posts) {
             res.status(200).json({
-                data: posts
+                data: posts,
             });
         } else {
             res.status(500).json({
-                error: "Empty Notes!"
+                error: "Empty Notes!",
             });
         }
     } catch (err) {
         res.status(500).json({
-            error: "There was a server side error!",
+            error: "There was a server side error!" + err,
         });
     }
-}
+};
 
 //find todo by id
 const getANote = async(req, res) => {
     try {
         const post = await Notes.findOne({
-            _id: req.params.id
+            _id: req.params.id,
         });
         if (post) {
             res.status(200).json({
-                data: post
+                data: post,
             });
         } else {
             res.status(500).json({
-                error: "Note is unavailable!"
+                error: "Note is unavailable!",
             });
         }
     } catch (err) {
@@ -39,8 +39,7 @@ const getANote = async(req, res) => {
             error: "There was a server side error!",
         });
     }
-}
-
+};
 
 //create a note
 const createNote = async(req, res) => {
@@ -57,13 +56,12 @@ const createNote = async(req, res) => {
                 });
             }
         });
-
     } catch (err) {
         res.status(500).json({
             error: "There was a server side error!" + err,
         });
     }
-}
+};
 
 //update a note by id
 const updateNote = async(req, res) => {
@@ -86,7 +84,6 @@ const updateNote = async(req, res) => {
                     });
                 }
             }
-
         );
     } catch (err) {
         res.status(500).json({
@@ -94,7 +91,6 @@ const updateNote = async(req, res) => {
         });
     }
 };
-
 
 //delete a note by id
 
@@ -117,11 +113,10 @@ const deleteANote = async(req, res) => {
     }
 };
 
-
 module.exports = {
     getAllNotes,
     getANote,
     createNote,
     updateNote,
-    deleteANote
-}
+    deleteANote,
+};
