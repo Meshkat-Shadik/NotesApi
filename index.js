@@ -16,11 +16,13 @@ const port = process.env.PORT || 3000;
 
 //database connection with mongoose
 mongoose
-    .connect(process.env.uriRI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-    })
+    .connect(
+        "mongodb+srv://mesh:meshnotesapi@cluster0.qye98.mongodb.net/NotesDB?retryWrites=true&w=majority", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+        }
+    )
     .then(() => console.log("Connection Successful"))
     .catch((err) => console.log(err));
 
