@@ -1,11 +1,9 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 const noteHandler = require("./routes/note_handler");
 const welcomeInfo = require("./welcome_information");
-
-
 
 //express app initialization
 const app = express();
@@ -13,13 +11,12 @@ app.use(express.json());
 
 dotenv.config();
 
-
 //port initialization
 const port = process.env.PORT || 3000;
 
 //database connection with mongoose
 mongoose
-    .connect(process.env.URI, {
+    .connect(process.env.uriRI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
@@ -27,12 +24,11 @@ mongoose
     .then(() => console.log("Connection Successful"))
     .catch((err) => console.log(err));
 
-
-
 //routes
-app.get("/", (req, res) => { res.json(welcomeInfo); });
+app.get("/", (req, res) => {
+    res.json(welcomeInfo);
+});
 app.use("/notes", noteHandler);
-
 
 app.use(error404Handler);
 app.use(errorHandler);
@@ -44,7 +40,7 @@ function error404Handler(req, res, next) {
 //default error handler
 function errorHandler(err, req, res, next) {
     if (res.headersSent) {
-        next('There was a problem in streaming!!');
+        next("There was a problem in streaming!!");
     } else {
         if (err.message) {
             res.status(500).json({ error: err.message });
@@ -53,8 +49,6 @@ function errorHandler(err, req, res, next) {
         }
     }
 }
-
-
 
 app.listen(port, () => {
     console.log(`Notes Api listening to port ${port}`);
