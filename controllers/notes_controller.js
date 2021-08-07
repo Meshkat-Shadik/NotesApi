@@ -22,7 +22,7 @@ const getAllNotes = async(req, res) => {
 //find todo by id
 const getANote = async(req, res) => {
     try {
-        const post = await Notes.findOne({
+        const post = await Notes.find({
             _id: req.params.id,
         });
         if (post) {
